@@ -312,7 +312,7 @@ This project was developed as \*\*Task 1 – Language Translation Tool\*\* for t
 
 GitHub:  
 
-https://github.com/divyasrree/CodeAlpha\_LanguageTranslationTool
+https://github.com/divyasrree/CodeAlpha_LanguageTranslationTool
 
 
 
