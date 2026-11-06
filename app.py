@@ -14,269 +14,819 @@ st.set_page_config(
 )
 
 # ============================================================
-# CUSTOM CSS
+# CUSTOM CSS — MIDNIGHT NAVY + ELECTRIC BLUE
 # ============================================================
 
 st.markdown("""
 <style>
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+* {
+    font-family: 'Inter', sans-serif;
+}
+
+html, body, [class*="css"] {
+    font-family: 'Inter', sans-serif;
+}
+
+/* ============================================================
+   MAIN BACKGROUND
+   ============================================================ */
+
 .stApp {
     background:
         radial-gradient(
-            circle at 5% 5%,
-            rgba(123, 72, 255, 0.22),
-            transparent 20%
+            circle at 8% 8%,
+            rgba(37, 99, 235, 0.22),
+            transparent 24%
         ),
         radial-gradient(
-            circle at 95% 95%,
-            rgba(210, 80, 255, 0.20),
-            transparent 22%
+            circle at 92% 20%,
+            rgba(14, 165, 255, 0.14),
+            transparent 25%
+        ),
+        radial-gradient(
+            circle at 85% 88%,
+            rgba(37, 99, 235, 0.16),
+            transparent 27%
         ),
         linear-gradient(
             135deg,
-            #f4f7ff 0%,
-            #eef0ff 45%,
-            #f8f2ff 100%
+            #020B24 0%,
+            #071735 52%,
+            #020B24 100%
+        );
+
+    color: #F8FAFC;
+    min-height: 100vh;
+}
+
+/* ============================================================
+   PAGE CONTAINER
+   ============================================================ */
+
+.block-container {
+    max-width: 1250px;
+    padding-top: 1.2rem !important;
+    padding-bottom: 2.5rem !important;
+}
+
+/* ============================================================
+   HIDE STREAMLIT DEFAULT ELEMENTS
+   ============================================================ */
+
+#MainMenu {
+    visibility: hidden;
+}
+
+footer {
+    visibility: hidden;
+}
+
+header {
+    background: transparent !important;
+}
+
+/* ============================================================
+   AMBIENT BLUE GLOW
+   ============================================================ */
+
+.stApp::before {
+    content: "";
+    position: fixed;
+    width: 360px;
+    height: 360px;
+    left: -180px;
+    top: 30%;
+    border-radius: 50%;
+    background: rgba(37, 99, 235, 0.18);
+    filter: blur(110px);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.stApp::after {
+    content: "";
+    position: fixed;
+    width: 320px;
+    height: 320px;
+    right: -150px;
+    bottom: 8%;
+    border-radius: 50%;
+    background: rgba(14, 165, 255, 0.14);
+    filter: blur(105px);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* ============================================================
+   HERO SECTION
+   ============================================================ */
+
+.hero-section {
+    position: relative;
+    text-align: center;
+    padding: 12px 10px 30px 10px;
+    overflow: hidden;
+}
+
+/* subtle dotted world-map-style background */
+
+.hero-section::before {
+    content: "";
+    position: absolute;
+    width: 900px;
+    height: 250px;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+
+    background-image:
+        radial-gradient(
+            circle,
+            rgba(56, 189, 248, 0.55) 1px,
+            transparent 1.4px
+        );
+
+    background-size: 8px 8px;
+
+    opacity: 0.10;
+
+    mask-image: linear-gradient(
+        to bottom,
+        black,
+        transparent
+    );
+
+    -webkit-mask-image: linear-gradient(
+        to bottom,
+        black,
+        transparent
+    );
+
+    pointer-events: none;
+}
+
+/* ============================================================
+   GLOBE
+   ============================================================ */
+
+.globe-area {
+    position: relative;
+    width: 105px;
+    height: 105px;
+    margin: 0 auto 12px auto;
+}
+
+.globe {
+    position: absolute;
+    width: 78px;
+    height: 78px;
+    left: 13px;
+    top: 13px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    font-size: 50px;
+
+    background:
+        radial-gradient(
+            circle at 32% 28%,
+            #8DDCFF 0%,
+            #38BDF8 18%,
+            #2563EB 55%,
+            #102B70 100%
+        );
+
+    border: 2px solid rgba(56, 189, 248, 0.75);
+
+    box-shadow:
+        0 0 20px rgba(14, 165, 255, 0.65),
+        0 0 55px rgba(37, 99, 235, 0.35),
+        inset -10px -12px 20px rgba(0, 0, 0, 0.25);
+
+    z-index: 2;
+}
+
+/* Globe orbit */
+
+.globe-orbit {
+    position: absolute;
+    width: 112px;
+    height: 38px;
+    left: -3px;
+    top: 34px;
+
+    border: 2px solid rgba(56, 189, 248, 0.58);
+    border-radius: 50%;
+
+    transform: rotate(-18deg);
+
+    box-shadow:
+        0 0 10px rgba(14, 165, 255, 0.20);
+}
+
+/* Small language bubbles */
+
+.language-bubble {
+    position: absolute;
+
+    width: 30px;
+    height: 30px;
+
+    border-radius: 9px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: white;
+    font-size: 14px;
+    font-weight: 700;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563EB,
+            #0EA5FF
+        );
+
+    border: 1px solid rgba(56, 189, 248, 0.55);
+
+    box-shadow:
+        0 0 15px rgba(14, 165, 255, 0.30);
+
+    z-index: 3;
+}
+
+.language-bubble.one {
+    left: -8px;
+    top: 4px;
+}
+
+.language-bubble.two {
+    right: -5px;
+    top: 28px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #4F46E5,
+            #8B5CF6
         );
 }
 
-.block-container {
-    max-width: 1350px;
-    padding-top: 2rem;
-    padding-bottom: 2rem;
+.language-bubble.three {
+    right: 4px;
+    bottom: 0;
+
+    background:
+        linear-gradient(
+            135deg,
+            #0284C7,
+            #06B6D4
+        );
 }
 
-/* Main application card */
+/* ============================================================
+   HERO TITLE
+   ============================================================ */
+
+.hero-title {
+    position: relative;
+
+    margin: 0;
+
+    font-size: clamp(
+        2.2rem,
+        4vw,
+        3.7rem
+    );
+
+    font-weight: 800;
+
+    letter-spacing: -1.5px;
+
+    line-height: 1.1;
+}
+
+.hero-title .white {
+    color: #F8FAFC;
+}
+
+.hero-title .blue {
+    background:
+        linear-gradient(
+            90deg,
+            #38BDF8,
+            #0EA5FF,
+            #60A5FA
+        );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    background-clip: text;
+}
+
+.hero-subtitle {
+    position: relative;
+
+    margin-top: 12px;
+    margin-bottom: 16px;
+
+    color: #AFC1DF;
+
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+.hero-underline {
+    width: 110px;
+    height: 4px;
+
+    margin: auto;
+
+    border-radius: 20px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #2563EB,
+            #0EA5FF,
+            #38BDF8
+        );
+
+    box-shadow:
+        0 0 16px rgba(14, 165, 255, 0.55);
+}
+
+/* ============================================================
+   MAIN GLASS CARD
+   ============================================================ */
 
 .main-card {
-    background: rgba(255, 255, 255, 0.94);
-    border-radius: 28px;
-    padding: 40px 45px;
+    position: relative;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(16, 31, 61, 0.96),
+            rgba(7, 23, 53, 0.96)
+        );
+
+    border-radius: 24px;
+
+    padding: 30px 34px;
+
+    border: 1px solid rgba(37, 99, 235, 0.55);
+
     box-shadow:
-        0 20px 60px rgba(58, 70, 140, 0.15),
-        0 4px 15px rgba(58, 70, 140, 0.07);
-    border: 1px solid rgba(255, 255, 255, 0.9);
+        0 25px 70px rgba(0, 0, 0, 0.42),
+        0 0 35px rgba(14, 165, 255, 0.10),
+        inset 0 1px 0 rgba(255, 255, 255, 0.045);
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
 }
 
-/* Section headings */
+/* glowing top edge */
+
+.main-card::before {
+    content: "";
+
+    position: absolute;
+
+    top: -1px;
+    left: 35px;
+
+    width: 125px;
+    height: 3px;
+
+    border-radius: 20px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #2563EB,
+            #0EA5FF,
+            #38BDF8
+        );
+
+    box-shadow:
+        0 0 16px rgba(14, 165, 255, 0.70);
+}
+
+/* ============================================================
+   SECTION HEADINGS
+   ============================================================ */
 
 .section-heading {
     display: flex;
     align-items: center;
-    gap: 15px;
-    color: #172b75;
-    font-size: 25px;
-    font-weight: 750;
-    margin-top: 5px;
-    margin-bottom: 15px;
+
+    gap: 13px;
+
+    color: #F8FAFC;
+
+    font-size: 20px;
+    font-weight: 700;
+
+    margin-top: 2px;
+    margin-bottom: 14px;
 }
 
 .section-icon {
-    width: 48px;
-    height: 48px;
+    width: 42px;
+    height: 42px;
+
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 50%;
+
+    border-radius: 13px;
+
     color: white;
-    font-size: 24px;
-    background: linear-gradient(
-        135deg,
-        #7c3aed,
-        #3b82f6
-    );
+
+    font-size: 20px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563EB,
+            #0EA5FF
+        );
+
+    border: 1px solid rgba(56, 189, 248, 0.50);
+
     box-shadow:
-        0 7px 18px rgba(100, 70, 220, 0.28);
+        0 0 18px rgba(14, 165, 255, 0.22);
 }
 
-/* Text area */
+/* ============================================================
+   TEXT AREA
+   ============================================================ */
 
 textarea {
-    border-radius: 16px !important;
-    border: 2px solid #d6ddff !important;
-    background: #ffffff !important;
-    font-size: 18px !important;
+    border-radius: 17px !important;
+
+    border: 1px solid rgba(37, 99, 235, 0.52) !important;
+
+    background:
+        linear-gradient(
+            145deg,
+            #111F3B,
+            #0C1933
+        ) !important;
+
+    color: #F8FAFC !important;
+
+    font-size: 17px !important;
+
+    line-height: 1.6 !important;
+
+    padding: 17px !important;
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.03),
+        0 8px 24px rgba(0,0,0,0.18);
 }
 
 textarea:focus {
-    border-color: #7655e8 !important;
+    border-color: #0EA5FF !important;
+
     box-shadow:
-        0 0 0 2px rgba(118, 85, 232, 0.12) !important;
+        0 0 0 1px rgba(14,165,255,0.30),
+        0 0 22px rgba(14,165,255,0.14) !important;
 }
 
-/* Language labels */
+textarea::placeholder {
+    color: #7185A8 !important;
+}
+
+/* ============================================================
+   LANGUAGE LABELS
+   ============================================================ */
 
 .language-label {
-    font-size: 16px;
-    color: #172b75;
+    font-size: 12px;
+
+    color: #AFC1DF;
+
     font-weight: 600;
-    margin-bottom: 6px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1px;
+
+    margin-bottom: 7px;
 }
 
-/* Select boxes */
+/* ============================================================
+   SELECT BOXES
+   ============================================================ */
 
 div[data-baseweb="select"] > div {
-    border-radius: 16px !important;
-    border: 2px solid #d6ddff !important;
-    background: #ffffff !important;
-    min-height: 58px;
+    border-radius: 15px !important;
+
+    border: 1px solid rgba(37, 99, 235, 0.52) !important;
+
+    background:
+        linear-gradient(
+            145deg,
+            #111F3B,
+            #0C1933
+        ) !important;
+
+    min-height: 56px !important;
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.03),
+        0 6px 20px rgba(0,0,0,0.16);
 }
 
-/* Arrow */
+div[data-baseweb="select"] > div:hover {
+    border-color: #0EA5FF !important;
+
+    box-shadow:
+        0 0 18px rgba(14,165,255,0.16);
+}
+
+div[data-baseweb="select"] span {
+    color: #F8FAFC !important;
+}
+
+div[data-baseweb="select"] svg {
+    fill: #AFC1DF !important;
+}
+
+/* ============================================================
+   LANGUAGE ARROW
+   ============================================================ */
 
 .language-arrow {
     height: 100%;
+
     min-height: 70px;
+
     display: flex;
+
     align-items: center;
+
     justify-content: center;
 }
 
 .arrow-circle {
-    width: 50px;
-    height: 50px;
+    width: 52px;
+    height: 52px;
+
     border-radius: 50%;
+
     display: flex;
+
     align-items: center;
+
     justify-content: center;
-    color: white;
-    font-size: 27px;
-    font-weight: bold;
-    background: linear-gradient(
-        135deg,
-        #8b5cf6,
-        #3b82f6
-    );
+
+    color: #FFFFFF;
+
+    font-size: 25px;
+
+    font-weight: 700;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563EB,
+            #0EA5FF
+        );
+
+    border: 2px solid rgba(56, 189, 248, 0.65);
+
     box-shadow:
-        0 8px 20px rgba(90, 80, 220, 0.28);
+        0 0 18px rgba(14, 165, 255, 0.40),
+        0 0 35px rgba(37, 99, 235, 0.20);
+
+    transition: all 0.25s ease;
 }
 
-/* Translate button */
+.arrow-circle:hover {
+    transform: scale(1.07);
+
+    box-shadow:
+        0 0 25px rgba(14, 165, 255, 0.60);
+}
+
+/* ============================================================
+   TRANSLATE BUTTON
+   ============================================================ */
 
 div.stButton > button {
     width: 100%;
-    height: 62px;
-    border-radius: 18px;
-    border: none;
-    color: white !important;
-    font-size: 21px;
-    font-weight: 700;
-    background: linear-gradient(
-        90deg,
-        #8b35df 0%,
-        #5c4ce8 45%,
-        #087df2 100%
-    );
+
+    height: 58px;
+
+    border-radius: 15px !important;
+
+    border: 1px solid rgba(56, 189, 248, 0.55) !important;
+
+    color: #FFFFFF !important;
+
+    font-size: 18px !important;
+
+    font-weight: 700 !important;
+
+    background:
+        linear-gradient(
+            90deg,
+            #2563EB 0%,
+            #0EA5FF 50%,
+            #2563EB 100%
+        ) !important;
+
     box-shadow:
-        0 10px 25px rgba(76, 82, 220, 0.30);
-    transition: all 0.2s ease;
+        0 9px 30px rgba(14, 165, 255, 0.28),
+        inset 0 1px 0 rgba(255,255,255,0.18);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease !important;
 }
 
 div.stButton > button:hover {
     transform: translateY(-2px);
+
     box-shadow:
-        0 14px 30px rgba(76, 82, 220, 0.38);
+        0 13px 38px rgba(14, 165, 255, 0.42),
+        0 0 20px rgba(37, 99, 235, 0.20) !important;
 }
 
-/* Result heading */
+div.stButton > button:active {
+    transform: translateY(0);
+}
+
+/* ============================================================
+   RESULT HEADING
+   ============================================================ */
 
 .result-heading {
     display: flex;
+
     align-items: center;
-    gap: 14px;
-    color: #164e63;
-    font-size: 25px;
-    font-weight: 750;
+
+    gap: 13px;
+
+    color: #F8FAFC;
+
+    font-size: 20px;
+
+    font-weight: 700;
+
     margin-top: 28px;
+
     margin-bottom: 12px;
 }
 
 .result-icon {
     width: 42px;
     height: 42px;
+
     border-radius: 50%;
+
     display: flex;
+
     align-items: center;
+
     justify-content: center;
-    background: linear-gradient(
-        135deg,
-        #42b857,
-        #16833b
-    );
+
+    background:
+        linear-gradient(
+            135deg,
+            #22C55E,
+            #16A34A
+        );
+
+    border: 1px solid rgba(74, 222, 128, 0.55);
+
     color: white;
-    font-size: 23px;
+
+    font-size: 21px;
+
+    box-shadow:
+        0 0 18px rgba(34,197,94,0.30);
 }
 
-/* Footer */
+/* ============================================================
+   FOOTER
+   ============================================================ */
 
 .footer {
     text-align: center;
-    color: #4c5b8a;
-    font-size: 15px;
-    margin-top: 25px;
-    padding-top: 20px;
-    border-top: 1px solid rgba(100, 120, 180, 0.18);
+
+    color: #647A9F;
+
+    font-size: 13px;
+
+    margin-top: 24px;
+
+    padding-top: 16px;
+}
+
+.footer-highlight {
+    color: #38BDF8;
+}
+
+/* ============================================================
+   MOBILE
+   ============================================================ */
+
+@media (max-width: 768px) {
+
+    .block-container {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+    }
+
+    .main-card {
+        padding: 22px 18px;
+        border-radius: 20px;
+    }
+
+    .hero-title {
+        font-size: 2.1rem;
+    }
+
+    .hero-subtitle {
+        font-size: 0.9rem;
+    }
+
+    .arrow-circle {
+        width: 46px;
+        height: 46px;
+        font-size: 22px;
+    }
+
+    .section-heading {
+        font-size: 18px;
+    }
+
+    .translated-text {
+        font-size: 1rem;
+    }
 }
 
 </style>
 """, unsafe_allow_html=True)
+
 
 # ============================================================
 # HEADER
 # ============================================================
 
 st.html("""
-<div style="
-    text-align: center;
-    padding: 25px 10px 35px 10px;
-">
+<div class="hero-section">
 
-    <div style="
-        font-size: 58px;
-        margin-bottom: 8px;
-    ">
-        🌐
+    <div class="globe-area">
+
+        <div class="globe-orbit"></div>
+
+        <div class="globe">
+            🌐
+        </div>
+
+        <div class="language-bubble one">
+            A
+        </div>
+
+        <div class="language-bubble two">
+            文
+        </div>
+
+        <div class="language-bubble three">
+            अ
+        </div>
+
     </div>
 
-    <div style="
-        font-size: 48px;
-        font-weight: 800;
-        letter-spacing: -1px;
-        background: linear-gradient(
-            90deg,
-            #172b75,
-            #7424d9,
-            #172b75
-        );
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    ">
-        Language Translation Tool
+    <div class="hero-title">
+        <span class="white">Language </span>
+        <span class="blue">Translation Tool</span>
     </div>
 
-    <div style="
-        font-size: 19px;
-        color: #4d5a82;
-        margin-top: 10px;
-    ">
+    <div class="hero-subtitle">
         Translate text quickly and easily between multiple languages.
     </div>
 
-    <div style="
-        width: 100px;
-        height: 4px;
-        margin: 18px auto 0 auto;
-        border-radius: 10px;
-        background: linear-gradient(
-            90deg,
-            #7424d9,
-            #3284ff
-        );
-    ">
-    </div>
+    <div class="hero-underline"></div>
 
 </div>
 """)
+
 
 # ============================================================
 # MAIN CARD
@@ -286,6 +836,7 @@ st.markdown(
     '<div class="main-card">',
     unsafe_allow_html=True
 )
+
 
 # ============================================================
 # ENTER TEXT
@@ -304,6 +855,7 @@ text = st.text_area(
     height=155,
     label_visibility="collapsed"
 )
+
 
 # ============================================================
 # LANGUAGES
@@ -343,6 +895,7 @@ st.markdown("""
     <div>Select Languages</div>
 </div>
 """, unsafe_allow_html=True)
+
 
 # ============================================================
 # LANGUAGE SELECTION
@@ -388,6 +941,7 @@ with col2:
         label_visibility="collapsed"
     )
 
+
 # ============================================================
 # TRANSLATE BUTTON
 # ============================================================
@@ -399,6 +953,7 @@ translate_clicked = st.button(
     type="primary",
     use_container_width=True
 )
+
 
 # ============================================================
 # TRANSLATION
@@ -471,11 +1026,10 @@ if translate_clicked:
                 <div style="
                     background: linear-gradient(
                         135deg,
-                        #effbea,
-                        #e7f8e8
+                        #063B37,
+                        #07332F
                     );
-                    border: 2px solid #b9e2bd;
-                    border-left: 7px solid #249447;
+                    border: 1px solid #22C55E;
                     border-radius: 16px;
                     padding: 20px 20px 20px 24px;
                     min-height: 85px;
@@ -484,11 +1038,13 @@ if translate_clicked:
                     justify-content: space-between;
                     gap: 20px;
                     box-sizing: border-box;
+                    box-shadow:
+                        0 0 20px rgba(34,197,94,0.08);
                 ">
 
                     <div style="
-                        color: #176b39;
-                        font-size: 23px;
+                        color: #F8FAFC;
+                        font-size: 22px;
                         font-weight: 600;
                         line-height: 1.5;
                         word-break: break-word;
@@ -500,12 +1056,12 @@ if translate_clicked:
                     <button
                         onclick="copyTranslation()"
                         style="
-                            background: white;
-                            color: #176b39;
-                            border: 2px solid #54a96b;
-                            border-radius: 12px;
-                            padding: 11px 18px;
-                            font-size: 16px;
+                            background: #0A4A43;
+                            color: #F8FAFC;
+                            border: 1px solid #22C55E;
+                            border-radius: 11px;
+                            padding: 10px 17px;
+                            font-size: 15px;
                             font-weight: 600;
                             cursor: pointer;
                             white-space: nowrap;
@@ -564,6 +1120,7 @@ if translate_clicked:
                 "Please make sure LibreTranslate is running."
             )
 
+
 # ============================================================
 # CLOSE CARD
 # ============================================================
@@ -573,18 +1130,14 @@ st.markdown(
     unsafe_allow_html=True
 )
 
+
 # ============================================================
 # FOOTER
 # ============================================================
 
 st.html("""
-<div style="
-    text-align: center;
-    color: #4c5b8a;
-    font-size: 15px;
-    margin-top: 25px;
-    padding-top: 20px;
-">
-    Built with ❤️ using Python • Streamlit • LibreTranslate
+<div class="footer">
+    Built with <span class="footer-highlight">♥</span>
+    using Python • Streamlit • LibreTranslate
 </div>
 """)
